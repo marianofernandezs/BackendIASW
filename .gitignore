@@ -1,0 +1,55 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+
+# --- Entornos virtuales ---
+venv/
+env/
+.virtualenv/
+.venv/
+
+# --- Dependencias / entornos ---
+pip-wheel-metadata/
+*.egg-info/
+*.egg
+dist/
+build/
+
+# --- Django ---
+# Archivos generados por Django
+*.log
+
+# Archivos de compilación y caché
+*.mo
+*.pot
+
+# --- Migrations (opcional: ignóralas solo si tu flujo lo justifica) ---
+# **Descomenta solo si controlas tus migraciones externamente**
+# */migrations/
+# !*/migrations/__init__.py
+
+# --- Media y estáticos generados ---
+media/
+staticfiles/
+static_root/
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Herramientas ---
+.env
+*.env
+.env.*
+coverage/
+htmlcov/
+pytest.cache/
