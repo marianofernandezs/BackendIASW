@@ -1,6 +1,8 @@
 import uuid
 from django.db import transaction
-from .models import Order, DeliveryRating
+from .models import Order, DeliveryRating, OrderComment
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+
 
 
 class RatingService:
@@ -57,3 +59,26 @@ class RatingService:
             raise ValueError("No se puede omitir un pedido ya calificado.")
 
         return order
+
+class OrderCommentService:
+    """
+    Servicio de negocio para gestionar comentarios de pedidos (HU12).
+    """
+
+    @staticmethod
+    def create_comment(order_id: uuid.UUID, user, message: str) -> OrderComment:
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            raise ObjectDoesNotExist(f"Pedido con ID {order_id} no encontrado.")
+
+        if not message or not message.strip():
+            raise ValidationError("El comentario no puede estar vacío.")
+
+        comment = OrderComment.objects.create(
+            order=order,
+            user=user,
+            message=message.strip()
+        )
+
+        return comment

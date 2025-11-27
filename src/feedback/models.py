@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 import uuid
 
 
@@ -64,3 +65,42 @@ class DeliveryRating(models.Model):
 
     def __str__(self):
         return f"Calificación para Pedido {self.order.id}: {self.score} estrellas"
+
+class OrderComment(models.Model):
+    """
+    Comentarios u observaciones del cliente sobre un pedido.
+    HU12: Comentarios de pedido.
+    """
+
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Pedido'
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='order_comments',
+        verbose_name='Usuario'
+    )
+
+    message = models.CharField(
+        max_length=300,
+        verbose_name='Comentario',
+        help_text='Máximo 300 caracteres.'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Fecha del comentario'
+    )
+
+    class Meta:
+        verbose_name = "Comentario de Pedido"
+        verbose_name_plural = "Comentarios de Pedidos"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Comentario de {self.user} en Pedido {self.order.id}"
