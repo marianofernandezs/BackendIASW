@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catálogo de Productos</title>
+</head>
+<body>
+
+<h1>Catálogo de Productos</h1>
+
+<form method="GET">
+    <select name="category">
+        <option value="">Todas las categorías</option>
+        {% for c in categories %}
+            <option value="{{ c.id }}" {% if current_category == c.id|stringformat:"s" %}selected{% endif %}>
+                {{ c.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="text" name="search_term" placeholder="Buscar..."
+           value="{{ current_search_term }}">
+
+    <button type="submit">Buscar</button>
+</form>
+
+<hr>
+
+{% for product in products_page %}
+    <div style="margin-bottom: 15px;">
+        <h3>
+            <a href="{% url 'catalog:product_detail' product.id %}">
+                {{ product.name }}
+            </a>
+        </h3>
+        <p>{{ product.description|slice:":120" }}...</p>
+        <p><strong>Precio:</strong> ${{ product.price }}</p>
+        <p><strong>Categoría:</strong> {{ product.category.name }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+        <p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
+    </div>
+{% empty %}
+    <p>No hay productos disponibles.</p>
+{% endfor %}
+
+<div>
+    {% if products_page.has_previous %}
+        <a href="?page={{ products_page.previous_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Anterior</a>
+    {% endif %}
+
+    <span>Página {{ products_page.number }} de {{ products_page.paginator.num_pages }}</span>
+
+    {% if products_page.has_next %}
+        <a href="?page={{ products_page.next_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Siguiente</a>
+    {% endif %}
+</div>
+
+</body>
+</html>
