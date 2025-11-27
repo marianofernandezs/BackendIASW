@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Calificar Entrega</title>
+    </head>
+    <body>
+        <h1>Calificar Entrega</h1>
+
+        <p>Pedido: {{ order.id }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div>
+                {{ form.score.label_tag }} {{ form.score }} {{ form.score.errors
+                }}
+            </div>
+
+            <div>
+                {{ form.comment.label_tag }} {{ form.comment }} {{
+                form.comment.errors }}
+            </div>
+
+            <button type="submit">Enviar Calificación</button>
+            <button type="submit" name="skip_rating">Omitir</button>
+        </form>
+    </body>
+</html>
