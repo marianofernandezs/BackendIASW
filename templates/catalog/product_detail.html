@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+</head>
+<body>
+
+<h1>{{ product.name }}</h1>
+
+<p><strong>Descripción:</strong> {{ product.description }}</p>
+
+<p><strong>Precio:</strong> ${{ product.price }}</p>
+
+<p><strong>Categoría:</strong> {{ product.category.name }}</p>
+
+<p><strong>Stock:</strong> {{ product.stock }}</p>
+
+<p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
+
+<p>
+    <a href="{% url 'catalog:product_stock' product.id %}">
+        Ver disponibilidad en tiempo real (JSON)
+    </a>
+</p>
+
+<p>
+    <a href="{% url 'catalog:product_list' %}">
+        ← Volver al catálogo
+    </a>
+</p>
+
+</body>
+</html>
