@@ -4,6 +4,16 @@ from django.urls import reverse
 from .forms import DeliveryRatingForm
 from .services import RatingService
 from .models import Order, DeliveryRating
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormView
+from .forms import DeliveryRatingForm, OrderCommentForm
+from .services import RatingService, OrderCommentService
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.contrib import messages
+from django.urls import reverse_lazy
+
+
+
 
 
 class RateDeliveryView(View):
@@ -70,3 +80,40 @@ class RatingConfirmationView(View):
                 'was_rated': was_rated
             }
         )
+
+class OrderCommentCreateView(LoginRequiredMixin, FormView):
+            template_name = 'feedback/comment_form.html'
+            form_class = OrderCommentForm
+
+            def get_context_data(self, **kwargs):
+                context = super().get_context_data(**kwargs)
+                order_id = self.kwargs.get('order_id')
+                context['order'] = get_object_or_404(Order, id=order_id)
+                return context
+
+            def form_valid(self, form):
+                order_id = self.kwargs.get('order_id')
+                message = form.cleaned_data['message']
+                user = self.request.user
+
+                try:
+                    OrderCommentService.create_comment(
+                        order_id=order_id,
+                        user=user,
+                        message=message
+                    )
+                    messages.success(self.request, "Comentario enviado correctamente.")
+                    return redirect(reverse_lazy('feedback:comment_success', kwargs={'order_id': order_id}))
+
+                except (ObjectDoesNotExist, ValidationError) as e:
+                    messages.error(self.request, str(e))
+                    return self.form_invalid(form)
+
+            def form_invalid(self, form):
+                messages.error(self.request, "Corrige los errores del formulario.")
+                return super().form_invalid(form)
+
+
+def comment_success_view(request, order_id):
+                order = get_object_or_404(Order, id=order_id)
+                return render(request, 'feedback/comment_success.html', {'order': order})

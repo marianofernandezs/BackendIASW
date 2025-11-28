@@ -1,5 +1,5 @@
 from django import forms
-from .models import DeliveryRating
+from .models import DeliveryRating, OrderComment
 
 class DeliveryRatingForm(forms.ModelForm):
     """
@@ -26,3 +26,28 @@ class DeliveryRatingForm(forms.ModelForm):
         if not (1 <= score <= 5):
             raise forms.ValidationError("La puntuación debe ser entre 1 y 5.")
         return score
+
+class OrderCommentForm(forms.ModelForm):
+    class Meta:
+        model = OrderComment
+        fields = ['message']
+        widgets = {
+            'message': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'Escribe tu comentario (máx 300 caract.)'
+            }),
+        }
+        labels = {
+            'message': 'Comentario'
+        }
+
+    def clean_message(self):
+        message = self.cleaned_data.get('message')
+
+        if not message or not message.strip():
+            raise forms.ValidationError("El comentario no puede estar vacío.")
+
+        if len(message) > 300:
+            raise forms.ValidationError("El comentario no puede superar los 300 caracteres.")
+
+        return message.strip()
