@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">Métodos de Pago Guardados</h2>
+
+    <!-- Mensajes de éxito o error -->
+    {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Lista de métodos -->
+    <div class="row">
+        {% for method in methods %}
+            {% include "payment_methods/_method_card.html" with method=method %}
+        {% empty %}
+            <p>No tienes métodos de pago guardados.</p>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <h4>Agregar un nuevo método</h4>
+    <p>
+        Para agregar un método de pago, tu aplicación deberá consumir la API:
+        <code>/payment-methods/save/</code> vía POST, enviando el token seguro
+        generado por tu proveedor de pagos (WebPay, Stripe, MercadoPago, etc.)
+    </p>
+
+</div>
+{% endblock %}

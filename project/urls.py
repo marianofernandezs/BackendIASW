@@ -16,12 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("accounts.urls")),
     path("auth_management/", include("auth_management.urls")),
     path("authentication/", include("authentication.urls")),
-    path("catalog/", include("catalog.urls"))
+    path("catalog/", include("catalog.urls")),
     path("feedback/", include("feedback.urls")),
+    path("payments/", include("payments.urls")),
+    path("checkout/", include("checkout.urls")),
+    path("payment-methods/", include("payment_methods.urls")),
+    # Alias to avoid 404s when login redirects to the default /accounts/login/
+    path("accounts/login/", RedirectView.as_view(pattern_name="auth_management:login", permanent=False)),
 ]

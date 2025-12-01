@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Pago</title>
+</head>
+<body>
+
+<h1>Iniciando Pago</h1>
+
+<p><strong>Usuario:</strong> {{ attempt.user_id }}</p>
+<p><strong>Monto:</strong> ${{ attempt.amount }}</p>
+
+<hr>
+
+<p>Estás siendo redirigido al entorno seguro de pago...</p>
+
+<p>Si no eres redirigido automáticamente, presiona:</p>
+
+<a href="{{ redirect_url }}">Ir al Pago Seguro</a>
+
+</body>
+</html>
