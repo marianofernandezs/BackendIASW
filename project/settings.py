@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'authentication',
     'catalog',
     'feedback',
+    'rest_framework',
+    'support_chat',
 ]
 
 MIDDLEWARE = [

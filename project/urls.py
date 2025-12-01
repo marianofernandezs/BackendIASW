@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts/', include("accounts.urls")),
     path("auth_management/", include("auth_management.urls")),
     path("authentication/", include("authentication.urls")),
-    path("catalog/", include("catalog.urls"))
+    path("catalog/", include("catalog.urls")),
     path("feedback/", include("feedback.urls")),
+    path("support_chat/", include("support_chat.urls")),
 ]
