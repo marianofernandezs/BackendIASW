@@ -34,7 +34,7 @@ echo "==============================================="
 # Generar árbol: incluye carpetas y archivos .java, .json, .yml
 # Se ajusta la lógica de 'find' para que las exclusiones funcionen correctamente
 find . \
-  \( "${EXCLUDE_ARGS[@]}" -type f \( -name "*.java" -o -name "*.json" -o -name "*.yml" -o -name "*.py" \) -print -o -type d -print \) \
+  \( "${EXCLUDE_ARGS[@]}" -type f \( -name "*.html" -o -name "*.json" -o -name "*.yml" -o -name "*.py" \) -print -o -type d -print \) \
   | sed -e 's;[^/]*/;|____;g' > "$OUTPUT_FILE"
 
 echo "✅ Árbol generado exitosamente en '$OUTPUT_FILE'"

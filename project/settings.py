@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'support_chat',
     'tickets',
+    'tracking',
+    'orders',
 ]
 
 MIDDLEWARE = [

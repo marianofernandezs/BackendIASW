@@ -26,4 +26,6 @@ urlpatterns = [
     path("feedback/", include("feedback.urls")),
     path("support_chat/", include("support_chat.urls")),
     path("tickets/", include("tickets.urls")),
+    path("tracking/", include("tracking.urls")),
+    path("orders/", include("orders.urls")),
 ]
