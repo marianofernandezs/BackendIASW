@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chat con Soporte</title>
+    </head>
+    <body>
+        <h1>Mis Chats con Soporte</h1>
+
+        <h3>Sesiones existentes</h3>
+        <ul>
+            {% for session in sessions %}
+            <li>
+                <a href="{% url 'support_chat:chat_room' session.id %}">
+                    Chat #{{ session.id }} – Estado: {{ session.status }}
+                </a>
+            </li>
+            {% empty %}
+            <li>No tienes chats aún.</li>
+            {% endfor %}
+        </ul>
+
+        <form method="post" action="{% url 'support_chat:create_session' %}">
+            {% csrf_token %}
+            <button type="submit">Crear nuevo chat</button>
+        </form>
+    </body>
+</html>

@@ -28,6 +28,9 @@ urlpatterns = [
     path("payments/", include("payments.urls")),
     path("checkout/", include("checkout.urls")),
     path("payment-methods/", include("payment_methods.urls")),
-    # Alias to avoid 404s when login redirects to the default /accounts/login/
     path("accounts/login/", RedirectView.as_view(pattern_name="auth_management:login", permanent=False)),
+    path("support_chat/", include("support_chat.urls")),
+    path("tickets/", include("tickets.urls")),
+    path("tracking/", include("tracking.urls")),
+    path("orders/", include("orders.urls")),
 ]

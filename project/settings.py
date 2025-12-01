@@ -48,6 +48,12 @@ INSTALLED_APPS = [
     'payments',
     'checkout',
     'payment_methods',
+    'rest_framework',
+    'support_chat',
+    'tickets',
+    'tracking',
+    'orders',
+
 ]
 
 MIDDLEWARE = [
