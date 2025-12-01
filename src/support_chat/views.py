@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.db import transaction # Para asegurar la atomicidad en operaciones.
+from django.shortcuts import render, redirect
 
 from support_chat.models import ChatSession
 from support_chat.serializers import ChatSessionSerializer, ChatMessageSerializer
@@ -97,3 +98,18 @@ class ChatMessageAPIView(APIView):
         messages = self._message_persistence_service.get_messages_for_session(session)
         serializer = ChatMessageSerializer(messages, many=True)
         return Response(serializer.data)
+
+
+def chat_session_list(request):
+    sessions = ChatSession.objects.all()
+    return render(request, "support_chat/chat_session_list.html", {"sessions": sessions})
+
+def create_chat_session(request):
+    if request.method == "POST":
+        session = ChatSession.objects.create()
+        return redirect("support_chat:chat_room", session.id)
+    return redirect("support_chat:chat_session_list")
+
+def chat_room(request, session_id):
+    session = ChatSession.objects.get(id=session_id)
+    return render(request, "support_chat/chat_room.html", {"session": session})
