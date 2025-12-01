@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..tracking.models import DeliveryPersonProfile
+from .models import DeliveryPersonProfile
 
 class DeliveryContactSerializer(serializers.ModelSerializer):
     """

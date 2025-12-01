@@ -4,7 +4,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
-from src.tracking.models import Order
+from tracking.models import Order
 from .serializers import DeliveryContactSerializer
 
 
