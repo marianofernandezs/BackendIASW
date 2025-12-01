@@ -25,4 +25,5 @@ urlpatterns = [
     path("catalog/", include("catalog.urls")),
     path("feedback/", include("feedback.urls")),
     path("support_chat/", include("support_chat.urls")),
+    path("tickets/", include("tickets.urls")),
 ]

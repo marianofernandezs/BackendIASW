@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'feedback',
     'rest_framework',
     'support_chat',
+    'tickets',
 ]
 
 MIDDLEWARE = [
