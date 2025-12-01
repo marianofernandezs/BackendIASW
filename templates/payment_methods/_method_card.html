@@ -1,0 +1,45 @@
+<div class="col-md-4 mb-3">
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <h5 class="card-title">
+                {{ method.method_type }}
+            </h5>
+
+            <p class="card-text">
+                <strong>Nombre:</strong> {{ method.display_name }} <br>
+                <strong>Fecha registro:</strong> {{ method.created_at|date:"d/m/Y H:i" }}
+            </p>
+
+            {% if method.is_default %}
+                <span class="badge bg-success mb-2">Predeterminado</span>
+            {% endif %}
+
+            <div class="d-flex gap-2">
+
+                <!-- Botón: hacer predeterminado -->
+                {% if not method.is_default %}
+                    <form method="post"
+                          action="{% url 'payment_methods:set_default' method.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-sm">
+                            Establecer como predeterminado
+                        </button>
+                    </form>
+                {% endif %}
+
+                <!-- Botón: eliminar -->
+                <form method="post"
+                      action="{% url 'payment_methods:delete' method.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-sm">
+                        Eliminar
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

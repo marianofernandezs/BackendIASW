@@ -39,16 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'accounts',
     'auth_management',
     'authentication',
     'catalog',
     'feedback',
+    'payments',
+    'checkout',
+    'payment_methods',
     'rest_framework',
     'support_chat',
     'tickets',
     'tracking',
     'orders',
+
 ]
 
 MIDDLEWARE = [
@@ -128,6 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+LOGIN_URL = '/auth_management/login/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

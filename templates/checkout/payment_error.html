@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error en Pago</title>
+</head>
+<body>
+
+<h1>⚠️ Error en el proceso</h1>
+
+<p>Se produjo un error al procesar tu pago:</p>
+
+<pre>
+{% if error_message %}
+{{ error_message }}
+{% elif error %}
+{{ error }}
+{% else %}
+Ocurrió un error desconocido.
+{% endif %}
+</pre>
+
+<a href="{% url 'checkout:pay' %}">Intentar nuevamente</a>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pago Exitoso</title>
+</head>
+<body>
+
+<h1>🎉 Pago Completado</h1>
+
+<p>El pago se ha procesado exitosamente.</p>
+
+<p><strong>ID del intento:</strong> {{ payment_attempt.id }}</p>
+<p><strong>Monto:</strong> ${{ payment_attempt.amount }}</p>
+
+<a href="{% url 'checkout:pay' %}">Iniciar otro pago</a>
+
+</body>
+</html>

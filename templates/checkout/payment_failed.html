@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pago Fallido</title>
+</head>
+<body>
+
+<h1>❌ Pago Rechazado</h1>
+
+<p>El pago no pudo completarse.</p>
+
+<p><strong>Estado:</strong> {{ payment_attempt.status }}</p>
+
+<a href="{% url 'checkout:pay' %}">Intentar nuevamente</a>
+
+</body>
+</html>
