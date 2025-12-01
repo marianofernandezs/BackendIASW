@@ -23,4 +23,5 @@ urlpatterns = [
     path("auth_management/", include("auth_management.urls")),
     path("authentication/", include("authentication.urls")),
     path("catalog/", include("catalog.urls"))
+    path("feedback/", include("feedback.urls")),
 ]

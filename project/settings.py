@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'auth_management',
     'authentication',
     'catalog',
+    'feedback',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Calificación Confirmada</title>
+    </head>
+    <body>
+        <h1>¡Gracias por tu feedback!</h1>
+
+        {% if was_rated %}
+        <p>Has calificado el pedido {{ order.id }} correctamente.</p>
+        {% else %}
+        <p>Has decidido no calificar el pedido {{ order.id }}.</p>
+        {% endif %}
+
+        <p><a href="/">Volver al inicio</a></p>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Agregar Comentario</title>
+    </head>
+    <body>
+        <h1>Comentario sobre el pedido {{ order.id }}</h1>
+
+        <form method="post">
+            {% csrf_token %} {{ form.message.label_tag }}<br />
+            {{ form.message }}<br />
+            {{ form.message.errors }}<br /><br />
+
+            <button type="submit">Enviar Comentario</button>
+        </form>
+
+        <p><a href="/">Cancelar</a></p>
+    </body>
+</html>
