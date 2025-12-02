@@ -1,29 +1,134 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Calificar Entrega</title>
-    </head>
-    <body>
-        <h1>Calificar Entrega</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Calificar Entrega</title>
 
-        <p>Pedido: {{ order.id }}</p>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
 
-        <form method="post">
-            {% csrf_token %}
+        .container {
+            max-width: 540px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
 
-            <div>
-                {{ form.score.label_tag }} {{ form.score }} {{ form.score.errors
-                }}
-            </div>
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #222;
+        }
 
-            <div>
-                {{ form.comment.label_tag }} {{ form.comment }} {{
-                form.comment.errors }}
-            </div>
+        p {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #555;
+        }
 
-            <button type="submit">Enviar Calificación</button>
-            <button type="submit" name="skip_rating">Omitir</button>
-        </form>
-    </body>
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        select, textarea, input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .errorlist {
+            color: #d9534f;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-submit {
+            background: #3b6cff;
+            color: #fff;
+        }
+
+        .btn-submit:hover {
+            background: #2f54c6;
+        }
+
+        .btn-skip {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-skip:hover {
+            background: #c7c7c7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Calificar Entrega</h1>
+
+    <p>Pedido: <strong>{{ order.id }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div>
+            <label for="{{ form.score.id_for_label }}">{{ form.score.label }}</label>
+            {{ form.score }}
+            {{ form.score.errors }}
+        </div>
+
+        <div>
+            <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
+            {{ form.comment }}
+            {{ form.comment.errors }}
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="btn-submit">Enviar Calificación</button>
+            <button type="submit" name="skip_rating" class="btn-skip">Omitir</button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
 </html>

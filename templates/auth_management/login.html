@@ -1,10 +1,115 @@
-<h1>Iniciar sesión</h1>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
 
-<form method="POST">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">Entrar</button>
-</form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-{% for message in messages %}
-<p>{{ message }}</p>
-{% endfor %}
+        .login-card {
+            background: #ffffff;
+            padding: 40px 35px;
+            width: 380px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+        }
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #005fd1;
+        }
+
+        /* Mensajes Django */
+        .messages {
+            margin-top: 18px;
+        }
+
+        .messages p {
+            background: #ffe5e5;
+            color: #c02626;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 6px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <h1>Iniciar sesión</h1>
+
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

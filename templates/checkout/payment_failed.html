@@ -1,17 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Pago Fallido</title>
+    <meta charset="UTF-8">
+    <title>Pago Rechazado</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: auto;
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #d9534f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .status-box {
+            background: #ffeaea;
+            border-left: 4px solid #d9534f;
+            padding: 14px;
+            border-radius: 6px;
+            margin: 18px 0;
+        }
+
+        strong {
+            color: #111;
+        }
+
+        a.button {
+            display: inline-block;
+            background: #3b6cff;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        a.button:hover {
+            background: #2f54c6;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>❌ Pago Rechazado</h1>
+<div class="container">
 
-<p>El pago no pudo completarse.</p>
+    <h1>❌ Pago Rechazado</h1>
 
-<p><strong>Estado:</strong> {{ payment_attempt.status }}</p>
+    <p>El pago no pudo completarse. Puedes revisar el estado reportado por la pasarela:</p>
 
-<a href="{% url 'checkout:pay' %}">Intentar nuevamente</a>
+    <div class="status-box">
+        <strong>Estado:</strong> {{ payment_attempt.status }}
+    </div>
+
+    <a class="button" href="{% url 'checkout:pay' %}">Intentar nuevamente</a>
+
+    <p class="footer-note">Si el problema continúa, comunícate con soporte.</p>
+
+</div>
 
 </body>
 </html>

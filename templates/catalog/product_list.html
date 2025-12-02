@@ -1,58 +1,183 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Productos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f6;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Contenedor del filtro */
+        .filter-box {
+            background: white;
+            padding: 25px 30px;
+            width: 80%;
+            max-width: 850px;
+            margin: 0 auto 35px auto;
+            border-radius: 14px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-box form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #005fd1;
+        }
+
+        /* Cards de productos */
+        .product-list {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .product-card a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .product-card a:hover {
+            text-decoration: underline;
+        }
+
+        .product-card p {
+            margin: 6px 0;
+            color: #444;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Paginación */
+        .pagination {
+            margin-top: 35px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .pagination a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination span {
+            color: #333;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Catálogo de Productos</h1>
+    <h1>Catálogo de Productos</h1>
 
-<form method="GET">
-    <select name="category">
-        <option value="">Todas las categorías</option>
-        {% for c in categories %}
-            <option value="{{ c.id }}" {% if current_category == c.id|stringformat:"s" %}selected{% endif %}>
-                {{ c.name }}
-            </option>
-        {% endfor %}
-    </select>
+    <div class="filter-box">
+        <form method="GET">
+            <select name="category">
+                <option value="">Todas las categorías</option>
+                {% for c in categories %}
+                    <option value="{{ c.id }}" {% if current_category == c.id|stringformat:"s" %}selected{% endif %}>
+                        {{ c.name }}
+                    </option>
+                {% endfor %}
+            </select>
 
-    <input type="text" name="search_term" placeholder="Buscar..."
-           value="{{ current_search_term }}">
+            <input type="text" name="search_term" placeholder="Buscar..."
+                   value="{{ current_search_term }}">
 
-    <button type="submit">Buscar</button>
-</form>
-
-<hr>
-
-{% for product in products_page %}
-    <div style="margin-bottom: 15px;">
-        <h3>
-            <a href="{% url 'catalog:product_detail' product.id %}">
-                {{ product.name }}
-            </a>
-        </h3>
-        <p>{{ product.description|slice:":120" }}...</p>
-        <p><strong>Precio:</strong> ${{ product.price }}</p>
-        <p><strong>Categoría:</strong> {{ product.category.name }}</p>
-        <p><strong>Stock:</strong> {{ product.stock }}</p>
-        <p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
+            <button type="submit">Buscar</button>
+        </form>
     </div>
-{% empty %}
-    <p>No hay productos disponibles.</p>
-{% endfor %}
 
-<div>
-    {% if products_page.has_previous %}
-        <a href="?page={{ products_page.previous_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Anterior</a>
-    {% endif %}
+    <div class="product-list">
+        {% for product in products_page %}
+        <div class="product-card">
 
-    <span>Página {{ products_page.number }} de {{ products_page.paginator.num_pages }}</span>
+            <h3>
+                <a href="{% url 'catalog:product_detail' product.id %}">
+                    {{ product.name }}
+                </a>
+            </h3>
 
-    {% if products_page.has_next %}
-        <a href="?page={{ products_page.next_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Siguiente</a>
-    {% endif %}
-</div>
+            <p>{{ product.description|slice:":120" }}...</p>
+            <p><strong>Precio:</strong> ${{ product.price }}</p>
+            <p><strong>Categoría:</strong> {{ product.category.name }}</p>
+            <p><strong>Stock:</strong> {{ product.stock }}</p>
+            <p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
+
+        </div>
+        {% empty %}
+            <p style="grid-column: 1 / -1; text-align: center; color: #777;">
+                No hay productos disponibles.
+            </p>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if products_page.has_previous %}
+            <a href="?page={{ products_page.previous_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ products_page.number }} de {{ products_page.paginator.num_pages }}</span>
+
+        {% if products_page.has_next %}
+            <a href="?page={{ products_page.next_page_number }}&category={{ current_category }}&search_term={{ current_search_term }}">Siguiente</a>
+        {% endif %}
+    </div>
 
 </body>
 </html>

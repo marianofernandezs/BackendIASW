@@ -1,22 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Iniciar Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: auto;
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #222;
+            text-align: center;
+        }
+
+        p {
+            margin: 6px 0 14px 0;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: #111;
+        }
+
+        .redirect-box {
+            background: #f0f4ff;
+            padding: 16px;
+            border-left: 4px solid #3b6cff;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 10px;
+            background: #3b6cff;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        a.button:hover {
+            background: #2f54c6;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+
+    </style>
 </head>
 <body>
 
-<h1>Iniciando Pago</h1>
+<div class="container">
 
-<p><strong>Usuario:</strong> {{ attempt.user_id }}</p>
-<p><strong>Monto:</strong> ${{ attempt.amount }}</p>
+    <h1>Iniciando Pago</h1>
 
-<hr>
+    <p><strong>Usuario:</strong> {{ attempt.user_id }}</p>
+    <p><strong>Monto:</strong> ${{ attempt.amount }}</p>
 
-<p>Estás siendo redirigido al entorno seguro de pago...</p>
+    <div class="redirect-box">
+        <p><strong>Estás siendo redirigido al entorno seguro de pago…</strong></p>
+        <p>Si no eres redirigido automáticamente, puedes continuar manualmente:</p>
+        <a class="button" href="{{ redirect_url }}">Ir al Pago Seguro</a>
+    </div>
 
-<p>Si no eres redirigido automáticamente, presiona:</p>
+    <p class="footer-note">Proceso seguro protegido por integraciones externas.</p>
 
-<a href="{{ redirect_url }}">Ir al Pago Seguro</a>
+</div>
 
 </body>
 </html>
+

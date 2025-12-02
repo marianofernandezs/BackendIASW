@@ -1,27 +1,119 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Chat con Soporte</title>
-    </head>
-    <body>
-        <h1>Mis Chats con Soporte</h1>
+<head>
+    <title>Chat con Soporte</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+        }
 
-        <h3>Sesiones existentes</h3>
-        <ul>
-            {% for session in sessions %}
-            <li>
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .session-list {
+            padding: 0;
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .session-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .session-info a {
+            text-decoration: none;
+            color: #1976d2;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .session-status {
+            font-size: 13px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: #eee;
+            color: #333;
+        }
+
+        .empty {
+            color: #777;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .create-box {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        button {
+            background: #2196f3;
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1e88e5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Mis Chats con Soporte</h1>
+
+    <h3 style="margin-bottom: 15px; color: #555;">Sesiones existentes</h3>
+
+    <ul class="session-list">
+        {% for session in sessions %}
+        <li class="session-card">
+            <div class="session-info">
                 <a href="{% url 'support_chat:chat_room' session.id %}">
-                    Chat #{{ session.id }} – Estado: {{ session.status }}
+                    Chat #{{ session.id }}
                 </a>
-            </li>
-            {% empty %}
-            <li>No tienes chats aún.</li>
-            {% endfor %}
-        </ul>
+            </div>
 
+            <span class="session-status">
+                Estado: {{ session.status }}
+            </span>
+        </li>
+        {% empty %}
+        <p class="empty">No tienes chats aún.</p>
+        {% endfor %}
+    </ul>
+
+    <div class="create-box">
         <form method="post" action="{% url 'support_chat:create_session' %}">
             {% csrf_token %}
             <button type="submit">Crear nuevo chat</button>
         </form>
-    </body>
+    </div>
+
+</div>
+</body>
 </html>

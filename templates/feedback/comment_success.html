@@ -1,16 +1,78 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Comentario Enviado</title>
-    </head>
-    <body>
-        <h1>✅ Comentario registrado</h1>
-        <p>
-            Tu comentario para el pedido {{ order.id }} fue guardado
-            correctamente.
-        </p>
+<head>
+    <meta charset="UTF-8">
+    <title>Comentario Enviado</title>
 
-        <p><a href="/">Volver al inicio</a></p>
-    </body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: auto;
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .success-box {
+            background: #e8f8ef;
+            border-left: 4px solid #28a745;
+            padding: 14px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        a.button {
+            display: inline-block;
+            background: #3b6cff;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        a.button:hover {
+            background: #2f54c6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✅ Comentario Registrado</h1>
+
+    <div class="success-box">
+        <p>Tu comentario para el pedido <strong>{{ order.id }}</strong> fue guardado correctamente.</p>
+    </div>
+
+    <a class="button" href="/">Volver al inicio</a>
+
+</div>
+
+</body>
 </html>

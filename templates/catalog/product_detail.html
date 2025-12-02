@@ -1,33 +1,94 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ product.name }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .product-card {
+            background: #ffffff;
+            padding: 40px;
+            width: 520px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: #222;
+        }
+
+        .links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 15px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>{{ product.name }}</h1>
+    <div class="product-card">
 
-<p><strong>Descripción:</strong> {{ product.description }}</p>
+        <h1>{{ product.name }}</h1>
 
-<p><strong>Precio:</strong> ${{ product.price }}</p>
+        <p><strong>Descripción:</strong> {{ product.description }}</p>
+        <p><strong>Precio:</strong> ${{ product.price }}</p>
+        <p><strong>Categoría:</strong> {{ product.category.name }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+        <p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
 
-<p><strong>Categoría:</strong> {{ product.category.name }}</p>
+        <div class="links">
+            <a href="{% url 'catalog:product_list' %}">← Volver al catálogo</a>
 
-<p><strong>Stock:</strong> {{ product.stock }}</p>
+            <a href="{% url 'catalog:product_stock' product.id %}">
+                Ver stock en tiempo real (JSON)
+            </a>
+        </div>
 
-<p><strong>Disponibilidad:</strong> {{ product.availability_message }}</p>
-
-<p>
-    <a href="{% url 'catalog:product_stock' product.id %}">
-        Ver disponibilidad en tiempo real (JSON)
-    </a>
-</p>
-
-<p>
-    <a href="{% url 'catalog:product_list' %}">
-        ← Volver al catálogo
-    </a>
-</p>
+    </div>
 
 </body>
 </html>

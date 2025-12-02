@@ -1,17 +1,83 @@
 <!doctype html>
-<html>
-    <head>
-        <title>Calificación Confirmada</title>
-    </head>
-    <body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Calificación Confirmada</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #222;
+        }
+
+        .success {
+            color: #0a8a3a;
+            font-weight: bold;
+        }
+
+        .skipped {
+            color: #777;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.7rem 1.2rem;
+            background: #276ef1;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        a.button:hover {
+            background: #174bb5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
         <h1>¡Gracias por tu feedback!</h1>
 
         {% if was_rated %}
-        <p>Has calificado el pedido {{ order.id }} correctamente.</p>
+            <p class="success">Calificación enviada correctamente.</p>
+            <p>Has calificado el pedido <strong>{{ order.id }}</strong>.</p>
         {% else %}
-        <p>Has decidido no calificar el pedido {{ order.id }}.</p>
+            <p class="skipped">Calificación omitida.</p>
+            <p>No calificaste el pedido <strong>{{ order.id }}</strong>.</p>
         {% endif %}
 
-        <p><a href="/">Volver al inicio</a></p>
-    </body>
+        <a href="/" class="button">Volver al inicio</a>
+    </div>
+</body>
 </html>

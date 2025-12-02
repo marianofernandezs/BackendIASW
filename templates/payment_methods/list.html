@@ -4,34 +4,95 @@
 {% block content %}
 <div class="container mt-4">
 
-    <h2 class="mb-4">Métodos de Pago Guardados</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Métodos de Pago Guardados</h2>
+        <a href="#" class="btn btn-primary btn-sm shadow-sm">
+            <i class="bi bi-plus-circle me-1"></i> Agregar método
+        </a>
+    </div>
 
     <!-- Mensajes de éxito o error -->
     {% if messages %}
-        <div class="mb-3">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
+    <div class="mb-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} shadow-sm py-2">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
     {% endif %}
 
     <!-- Lista de métodos -->
-    <div class="row">
+    <div class="row g-4">
         {% for method in methods %}
-            {% include "payment_methods/_method_card.html" with method=method %}
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm rounded-4 method-card h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title fw-semibold">{{ method.display_name }}</h5>
+                            <span class="badge bg-secondary">{{ method.method_type }}</span>
+                        </div>
+
+                        <div class="text-muted small mb-3">
+                            <i class="bi bi-calendar-event me-1"></i>
+                            Registrado el {{ method.created_at|date:"d/m/Y H:i" }}
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'payment_methods_edit' method.id %}" 
+                               class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                <i class="bi bi-pencil-square me-1"></i> Editar
+                            </a>
+
+                            <form method="post" action="{% url 'payment_methods_delete' method.id %}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                    <i class="bi bi-trash me-1"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         {% empty %}
-            <p>No tienes métodos de pago guardados.</p>
+        <div class="col-12 text-center py-4">
+            <div class="text-muted">
+                <i class="bi bi-credit-card fs-1 d-block mb-2"></i>
+                No tienes métodos de pago guardados.
+            </div>
+        </div>
         {% endfor %}
     </div>
 
-    <hr>
+    <hr class="my-5">
 
-    <h4>Agregar un nuevo método</h4>
-    <p>
-        Para agregar un método de pago, tu aplicación deberá consumir la API:
-        <code>/payment-methods/save/</code> vía POST, enviando el token seguro
-        generado por tu proveedor de pagos (WebPay, Stripe, MercadoPago, etc.)
-    </p>
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+
+            <h4 class="fw-semibold mb-3">Agregar un nuevo método</h4>
+            <p class="text-muted mb-3">
+                Para registrar un nuevo método de pago, tu aplicación debe realizar un 
+                <strong>POST</strong> hacia:
+            </p>
+
+            <div class="bg-light border rounded p-3 mb-3">
+                <code class="text-dark">/payment-methods/save/</code>
+            </div>
+
+            <p class="text-muted">
+                Enviando el <strong>token seguro</strong> proporcionado por tu proveedor 
+                (WebPay, Stripe, MercadoPago, etc.)
+            </p>
+
+        </div>
+    </div>
 
 </div>
 {% endblock %}

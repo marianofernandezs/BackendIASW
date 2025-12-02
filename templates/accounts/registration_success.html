@@ -1,10 +1,74 @@
 <!doctype html>
-<html>
-    <head>
-        <title>Registro exitoso</title>
-    </head>
-    <body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro exitoso</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            width: 380px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        h1 {
+            color: #2f7a32;
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        p {
+            color: #444;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 12px 18px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        a.button:hover {
+            background: #005dc1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
         <h1>Cuenta creada correctamente 🎉</h1>
         <p>Puedes iniciar sesión cuando esté disponible.</p>
-    </body>
+
+        <a href="/login/" class="button">Ir a iniciar sesión</a>
+    </div>
+
+</body>
 </html>

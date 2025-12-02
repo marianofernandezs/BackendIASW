@@ -1,2 +1,78 @@
-<h1>Bienvenido al dashboard</h1>
-<p>Login funcionando correctamente 🎉</p>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+        }
+
+        .navbar {
+            background: #007bff;
+            padding: 14px 20px;
+            color: #fff;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            animation: fadeIn 0.4s ease;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        .status {
+            display: inline-block;
+            background: #e9f7ef;
+            color: #2e7d32;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        Dashboard
+    </div>
+
+    <div class="container">
+        <h1>Bienvenido al dashboard</h1>
+        <p>Tu inicio de sesión ha sido verificado correctamente.</p>
+
+        <div class="status">
+            Login funcionando correctamente 🎉
+        </div>
+    </div>
+
+</body>
+</html>
